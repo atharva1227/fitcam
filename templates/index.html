@@ -1,84 +1,166 @@
-{% extends 'base.html' %}
-
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>SmartFit - Perfect Fit Every Time</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
 <body>
-
-    <header>
+    <!-- Hero Section -->
+    <header class="hero">
         <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Contact</a></li>
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span>Fitcam</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <div class="hero-content">
+            <h1>Perfect Fit, Every Time</h1>
+            <p>Shop with confidence using our AI-powered measurement technology</p>
+            <div class="cta-buttons">
+                <button class="btn primary" onclick="openAICamera()">Try AI Measurement</button>
+                <button class="btn secondary">Start Shopping</button>
+            </div>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Our Service</h1>
-            <p>Your perfect solution to boost productivity.</p>
-            <a href="#" class="cta-button">Get Started</a>
-        </div>
-    </section>
-
+    <!-- Features Section -->
     <section class="features">
-        <div class="feature">
-            <h2>Feature 1</h2>
-            <p>Discover amazing functionality to improve your workflow.</p>
-        </div>
-        <div class="feature">
-            <h2>Feature 2</h2>
-            <p>Seamless integration with the tools you already use.</p>
-        </div>
-        <div class="feature">
-            <h2>Feature 3</h2>
-            <p>Powerful analytics to track your progress.</p>
+        <h2>How It Works</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                <h3>AI Camera Measurement</h3>
+                <p>Take a quick scan with your phone's camera to get precise measurements</p>
+            </div>
+            <div class="feature-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2M3 7h18M3 7v14m18-14v14m-7-7h.01M6 7v14m12-14v14"/></svg>
+                <h3>Smart Size Matching</h3>
+                <p>Our AI matches your measurements with perfect fitting clothes</p>
+            </div>
+            <div class="feature-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <h3>Shop Confidently</h3>
+                <p>Browse and purchase clothes knowing they'll fit perfectly</p>
+            </div>
         </div>
     </section>
 
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <h2>Why Choose Us</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                <h3>100% Fit Guarantee</h3>
+                <p>Perfect fit or your money back, no questions asked</p>
+            </div>
+            <div class="benefit-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17.5H4a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-6"/><path d="M12 15v6"/><path d="m15 18-3 3-3-3"/></svg>
+                <h3>Free Shipping</h3>
+                <p>Free shipping on orders over $50</p>
+            </div>
+            <div class="benefit-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <h3>Quick Returns</h3>
+                <p>Easy 30-day returns process</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Transform Your Shopping Experience?</h2>
+        <p>Join thousands of satisfied customers who never worry about size again</p>
+        <button class="btn primary" onclick="openAICamera()">Get Started Now</button>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span>SmartFit</span>
+                </div>
+                <p>Making online shopping fit perfectly</p>
+            </div>
+            <div class="footer-section">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
 
+    <!-- AI Camera Modal -->
+    <div id="aiCameraModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>AI Measurement</h2>
+            <div id="cameraContainer">
+                <div id="cameraPreview">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                </div>
+                <div id="processedImageContainer">
+                    <img id="processedImage" style="display: none;" />
+                </div>
+            </div>
+            <div class="camera-controls">
+                <button id="startCamera" class="btn primary">Start Camera</button>
+                <button id="capturePhoto" class="btn secondary" disabled>Start Real-Time Analysis</button>
+            </div>
+            <div id="measurementResults" style="display: none;">
+                <h3>Your Measurements (Real-Time)</h3>
+                <div class="measurements-grid">
+                    <div class="measurement">
+                        <span>Chest:</span>
+                        <span id="chestSize">-- cm</span>
+                    </div>
+                    <div class="measurement">
+                        <span>Waist:</span>
+                        <span id="waistSize">-- cm</span>
+                    </div>
+                    <div class="measurement">
+                        <span>Hip:</span>
+                        <span id="hipSize">-- cm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
-
-{% endblock %}
-
-{% block css %}
-   <style>
-    .hero{
-        text-align: center;
-        background-color: blueviolet;
-        colour:white;
-        padding: 30px;
-        border: 1px solid black;
-        box-shadow: 0 12px 8px 0 rgba(0,0,0, 0.2);
-        border: radius 100px;
-    }
-    .main{
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: aliceblue;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .features{
-        background-color: blue;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-    }
-   </style>
-{% endblock %}
